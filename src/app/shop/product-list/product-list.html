@@ -1,0 +1,26 @@
+<!-- src/app/shop/product-list/product-list.html -->
+
+<div class="products-container">
+  <h2>همه محصولات</h2>
+  <div class="product-grid">
+    <div class="product-card" *ngFor="let product of products" [routerLink]="['/shop/product', product.id]">
+      <img [src]="product.image" [alt]="product.name" class="product-image" />
+      <div class="product-info">
+        <h3 class="product-title">{{ product.name }}</h3>
+        <p class="product-brand">{{ product.brand }}</p>
+        <div class="product-price">
+          <span class="price">{{ product.price | currency:'IRR':'symbol':'0.0' }}</span>
+          <span *ngIf="product.discount" class="discount">
+            {{ (product.price * (1 - product.discount / 100)) | currency:'IRR':'symbol':'0.0' }}
+          </span>
+        </div>
+        <div class="product-rating">
+          ⭐ {{ product.rating }}
+        </div>
+        <button mat-raised-button color="primary" [disabled]="!product.inStock">
+          {{ product.inStock ? 'افزودن به سبد' : 'ناموجود' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

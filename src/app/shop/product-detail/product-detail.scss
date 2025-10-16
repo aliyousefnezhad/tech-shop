@@ -1,0 +1,145 @@
+.product-detail-container {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+
+  .product-images {
+    flex: 1;
+    min-width: 300px;
+
+    .main-image {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+  }
+
+  .product-info {
+    flex: 2;
+    min-width: 300px;
+
+    .product-header {
+      h1 {
+        font-size: 2rem;
+        margin: 0 0 0.5rem 0;
+        color: #222;
+      }
+
+      .brand {
+        color: #666;
+        font-size: 1.2rem;
+        margin: 0 0 1rem 0;
+      }
+
+      .rating {
+        display: flex;
+        gap: 0.2rem;
+        margin: 0.5rem 0;
+      }
+
+      .stock-status {
+        display: inline-block;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: bold;
+        margin-top: 0.5rem;
+
+        &.in-stock {
+          background: #d4edda;
+          color: #155724;
+        }
+
+        &.out-of-stock {
+          background: #f8d7da;
+          color: #721c24;
+        }
+      }
+    }
+
+    .price-section {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.5rem 0;
+
+      .price {
+        .original-price {
+          font-size: 1.3rem;
+          color: #e74c3c;
+          text-decoration: line-through;
+        }
+
+        .discounted-price {
+          font-size: 1.6rem;
+          font-weight: bold;
+          color: #27ae60;
+        }
+      }
+
+      .discount-badge {
+        background: #ff6b6b;
+        color: white;
+        padding: 0.4rem 0.8rem;
+        border-radius: 20px;
+        font-weight: bold;
+        font-size: 0.9rem;
+      }
+    }
+
+    .description, .specs {
+      margin: 2rem 0;
+
+      h3 {
+        margin-bottom: 1rem;
+        color: #333;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 0.5rem;
+      }
+
+      p {
+        line-height: 1.7;
+        color: #555;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+          padding: 0.5rem 0;
+          border-bottom: 1px solid #f0f0f0;
+          color: #444;
+
+          strong {
+            color: #222;
+            margin-left: 0.5rem;
+          }
+        }
+      }
+    }
+
+    .add-to-cart-btn {
+      width: 100%;
+      padding: 1rem;
+      font-size: 1.1rem;
+      margin-top: 2rem;
+    }
+  }
+}
+
+.not-found {
+  text-align: center;
+  padding: 4rem 2rem;
+
+  h2 {
+    color: #e74c3c;
+    margin-bottom: 1.5rem;
+  }
+}

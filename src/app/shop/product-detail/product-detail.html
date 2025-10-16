@@ -1,0 +1,69 @@
+<div class="product-detail-container" *ngIf="product; else notFound">
+  <div class="product-images">
+    <img [src]="product.image" [alt]="product.name" class="main-image" />
+  </div>
+
+  <div class="product-info">
+    <div class="product-header">
+      <h1>{{ product.name }}</h1>
+      <p class="brand">برند: {{ product.brand }}</p>
+      <!-- جایگزین کنید در بخش rating -->
+
+<div class="rating">
+  @for (i of starArray; track i) {
+    <mat-icon *ngIf="i < product.rating" color="warn">star</mat-icon>
+    <mat-icon *ngIf="i >= product.rating" color="disabled">star_border</mat-icon>
+  }
+</div>
+
+      <div class="stock-status" [class.in-stock]="product.inStock" [class.out-of-stock]="!product.inStock">
+        {{ product.inStock ? 'موجود' : 'ناموجود' }}
+      </div>
+    </div>
+
+    <div class="price-section">
+      <div class="price">
+        @if (product.discount) {
+          <span class="original-price">{{ product.price | currency:'IRR':'symbol':'0.0' }}</span>
+          <span class="discounted-price">{{ (product.price * (1 - product.discount / 100)) | currency:'IRR':'symbol':'0.0' }}</span>
+        } @else {
+          <span class="discounted-price">{{ product.price | currency:'IRR':'symbol':'0.0' }}</span>
+        }
+      </div>
+      @if (product.discount) {
+        <div class="discount-badge">{{ product.discount }}% تخفیف</div>
+      }
+    </div>
+
+    <div class="description">
+      <h3>توضیحات</h3>
+      <p>{{ product.description }}</p>
+    </div>
+
+    <div class="specs">
+      <h3>مشخصات فنی</h3>
+      <ul>
+        @for (spec of getSpecsArray(); track spec.key) {
+          <li><strong>{{ spec.key }}:</strong> {{ spec.value }}</li>
+        }
+      </ul>
+    </div>
+
+    <button
+      mat-raised-button
+      color="primary"
+      class="add-to-cart-btn"
+      (click)="addToCart()"
+      [disabled]="!product.inStock"
+    >
+      {{ product.inStock ? 'افزودن به سبد خرید' : 'ناموجود' }}
+    </button>
+  </div>
+</div>
+
+<ng-template #notFound>
+  <div class="not-found">
+    <h2>محصولی یافت نشد!</h2>
+    <a routerLink="/shop/products" mat-button color="primary">بازگشت به فروشگاه</a>
+  </div>
+</ng-template>
