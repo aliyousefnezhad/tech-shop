@@ -1,26 +1,31 @@
-<!-- src/app/shop/product-list/product-list.html -->
-
 <div class="products-container">
-  <h2>همه محصولات</h2>
+  <h2>
+    @if (route.snapshot.queryParamMap.get('category') === 'laptop') {
+      لپتاپ‌ها
+    } @else if (route.snapshot.queryParamMap.get('category') === 'phone') {
+      گوشی‌ها
+    } @else if (route.snapshot.queryParamMap.get('category') === 'headphone') {
+      هدفون‌ها
+    } @else {
+      همه محصولات
+    }
+  </h2>
+
   <div class="product-grid">
-    <div class="product-card" *ngFor="let product of products" [routerLink]="['/shop/product', product.id]">
-      <img [src]="product.image" [alt]="product.name" class="product-image" />
-      <div class="product-info">
-        <h3 class="product-title">{{ product.name }}</h3>
-        <p class="product-brand">{{ product.brand }}</p>
-        <div class="product-price">
-          <span class="price">{{ product.price | currency:'IRR':'symbol':'0.0' }}</span>
-          <span *ngIf="product.discount" class="discount">
-            {{ (product.price * (1 - product.discount / 100)) | currency:'IRR':'symbol':'0.0' }}
-          </span>
+    @for (product of filteredProducts; track product.id) {
+      <div class="product-card">
+        <img [src]="product.image" [alt]="product.name" />
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.brand }}</p>
+        <div class="price">{{ product.price | currency:'IRR':'symbol':'0.0' }}</div>
+        <div class="rating">
+          @for (i of starArray; track i) {
+            <mat-icon *ngIf="i < product.rating" color="warn">star</mat-icon>
+            <mat-icon *ngIf="i >= product.rating" color="disabled">star_border</mat-icon>
+          }
         </div>
-        <div class="product-rating">
-          ⭐ {{ product.rating }}
-        </div>
-        <button mat-raised-button color="primary" [disabled]="!product.inStock">
-          {{ product.inStock ? 'افزودن به سبد' : 'ناموجود' }}
-        </button>
+        <button mat-raised-button color="primary">افزودن به سبد</button>
       </div>
-    </div>
+    }
   </div>
 </div>
